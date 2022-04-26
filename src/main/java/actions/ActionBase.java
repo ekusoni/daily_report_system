@@ -34,12 +34,12 @@ public abstract class ActionBase {
      * @param servletResponse
      */
     public void init(
-        ServletContext servletContext,
-        HttpServletRequest servletRequest,
-        HttpServletResponse servletResponse) {
-        this.context=servletContext;
-        this.request=servletRequest;
-        this.response=servletResponse;
+            ServletContext servletContext,
+            HttpServletRequest servletRequest,
+            HttpServletResponse servletResponse) {
+        this.context = servletContext;
+        this.request = servletRequest;
+        this.response = servletResponse;
     }
 
     /**
@@ -47,8 +47,7 @@ public abstract class ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-    public abstract void process() throws ServletException,IOException;
-
+    public abstract void process() throws ServletException, IOException;
 
     /**
      * パラメータのcommandの値に該当するメソッドを実行する
@@ -56,21 +55,20 @@ public abstract class ActionBase {
      * @throws IOException
      */
     protected void invoke()
-            throws ServletException,IOException{
+            throws ServletException, IOException {
         Method commandMethod;
         try {
 
             //パラメータからcommandを取得
-            String command=request.getParameter(ForwardConst.CMD.getValue());
+            String command = request.getParameter(ForwardConst.CMD.getValue());
 
             //commandに該当するメソッドを実行する
             //(例:action=Employee command=showの場合 EmployeeActionクラスのshow()メソッドを実行する
-            commandMethod=this.getClass().getDeclaredMethod(command, new Class[0]);
-            commandMethod.invoke(this,new Object[0]);//メソッドに渡す引数なし
+            commandMethod = this.getClass().getDeclaredMethod(command, new Class[0]);
+            commandMethod.invoke(this, new Object[0]);//メソッドに渡す引数なし
 
-        }catch(NoSuchMethodException|SecurityException|IllegalAccessException|IllegalArgumentException
-                |InvocationTargetException|NullPointerException e) {
-
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | NullPointerException e) {
 
             //発生した例外をコンソールに表示
             e.printStackTrace();
@@ -78,20 +76,21 @@ public abstract class ActionBase {
             forward(ForwardConst.FW_ERR_UNKNOWN);
         }
     }
+
     /**
      * 指定されたjspの呼び出しを行う
      * @param target 遷移先jsp画面のファイル名(拡張子を含まない)
      * throws Servlet Exception
      * @throws IOEception
      */
-    protected void forward(ForwardConst target)throws ServletException,IOException{
+    protected void forward(ForwardConst target) throws ServletException, IOException {
 
         //jspファイルの相対パスを作成
-        String forward=String.format("/WEB-INF/views/%s.jsp",target.getValue());
-        RequestDispatcher dispatcher=request.getRequestDispatcher(forward);
+        String forward = String.format("/WEB-INF/views/%s.jsp", target.getValue());
+        RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
 
         //jspファイルの呼び出し
-        dispatcher.forward(request,response);
+        dispatcher.forward(request, response);
 
     }
 
@@ -102,19 +101,18 @@ public abstract class ActionBase {
      * @throws ServletException
      * @throws IOEXception
      */
-    protected void redirect(ForwardConst action,ForwardConst command)
-             throws ServletException,IOException{
+    protected void redirect(ForwardConst action, ForwardConst command)
+            throws ServletException, IOException {
 
         //URLを構築
-        String redirectUrl=request.getContextPath()+"/?action="+action.getValue();
-       if(command!=null) {
-           redirectUrl=redirectUrl+"&command="+command.getValue();
-       }
+        String redirectUrl = request.getContextPath() + "/?action=" + action.getValue();
+        if (command != null) {
+            redirectUrl = redirectUrl + "&command=" + command.getValue();
+        }
 
-       //URLへリダイレクト
-       response.sendRedirect(redirectUrl);
+        //URLへリダイレクト
+        response.sendRedirect(redirectUrl);
     }
-
 
     /**
      * CSRF対策token不正の場合はエラー画面を表示
@@ -122,17 +120,17 @@ public abstract class ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-    protected boolean checkToken() throws ServletException, IOException{
+    protected boolean checkToken() throws ServletException, IOException {
         //パラメータからtokenの値を取得
-        String _token=getRequestParam(AttributeConst.TOKEN);
+        String _token = getRequestParam(AttributeConst.TOKEN);
 
-        if(_token==null||!(_token.equals(getTokenId()))) {
+        if (_token == null || !(_token.equals(getTokenId()))) {
 
             //tokenが認定されていない、またはセッションIDと一致しない場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
 
             return false;
-        }else {
+        } else {
             return true;
         }
     }
@@ -145,16 +143,15 @@ public abstract class ActionBase {
         return request.getSession().getId();
     }
 
-
     /**
      * リクエストから表示されているページ数を取得し、返却する
      * @return 要求されているページ数(要求がない場合は1)
      */
     protected int getPage() {
         int page;
-        page=toNumber(request.getParameter(AttributeConst.PAGE.getValue()));
-        if(page==Integer.MIN_VALUE) {
-            page=1;
+        page = toNumber(request.getParameter(AttributeConst.PAGE.getValue()));
+        if (page == Integer.MIN_VALUE) {
+            page = 1;
         }
         return page;
 
@@ -165,11 +162,11 @@ public abstract class ActionBase {
      * @return 変換後数値
      */
     protected int toNumber(String strNumber) {
-        int number=0;
+        int number = 0;
         try {
-            number=Integer.parseInt(strNumber);
-        }catch(Exception e) {
-            number=Integer.MIN_VALUE;
+            number = Integer.parseInt(strNumber);
+        } catch (Exception e) {
+            number = Integer.MIN_VALUE;
         }
         return number;
     }
@@ -180,7 +177,7 @@ public abstract class ActionBase {
      * @return 変換後LocalDateインスタンス
      */
     protected LocalDate toLocalDate(String strDate) {
-        if(strDate==null||strDate.equals("")) {
+        if (strDate == null || strDate.equals("")) {
             return LocalDate.now();
         }
         return LocalDate.parse(strDate);
@@ -200,7 +197,7 @@ public abstract class ActionBase {
      * @param key パラメータ名
      * @param value パラメータの値
      */
-    protected <V> void putRequestScope(AttributeConst key,V value) {
+    protected <V> void putRequestScope(AttributeConst key, V value) {
         request.setAttribute(key.getValue(), value);
 
     }
@@ -220,7 +217,7 @@ public abstract class ActionBase {
      * @param key パラメータ名
      * param value パラメータの値
      */
-    protected <V> void putSessionScope(AttributeConst key,V value) {
+    protected <V> void putSessionScope(AttributeConst key, V value) {
         request.getSession().setAttribute(key.getValue(), value);
     }
 

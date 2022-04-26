@@ -64,7 +64,7 @@ public class Employee {
 
 
     /**
-     * 社員番号
+     * 氏名
      */
     @Column(name=JpaConst.EMP_COL_NAME,nullable=false)
     private String name;
