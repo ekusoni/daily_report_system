@@ -35,7 +35,7 @@ public class ReportConverter {
      */
     public static ReportView toView(Report r) {
 
-        if(r==null) {
+        if(r == null) {
             return null;
         }
 

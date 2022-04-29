@@ -16,19 +16,18 @@ public class ReportValidator {
      * @param rv 日報インスタンス
      * @return エラーのリスト
      */
-    public static List<String> validate(ReportView rv){
-        List<String> errors=new ArrayList<String>();
-
+    public static List<String> validate(ReportView rv) {
+        List<String> errors = new ArrayList<String>();
 
         //タイトルのチェック
-        String titleError=validateTitle(rv.getTitle());
-        if(!titleError.equals("")) {
+        String titleError = validateTitle(rv.getTitle());
+        if (!titleError.equals("")) {
             errors.add(titleError);
         }
 
         //内容のチェック
-        String contentError=validateContent(rv.getContent());
-        if(!contentError.equals("")) {
+        String contentError = validateContent(rv.getContent());
+        if (!contentError.equals("")) {
             errors.add(contentError);
         }
 
@@ -41,20 +40,18 @@ public class ReportValidator {
      * @return エラーメッセージ
      */
     private static String validateTitle(String title) {
-        if(title==null||title.equals("")) {
+        if (title == null || title.equals("")) {
             return MessageConst.E_NOTITLE.getMessage();
         }
-
 
         //入力値がある場合は空文字を返却
         return "";
     }
 
     private static String validateContent(String content) {
-        if(content==null||content.equals("")) {
+        if (content == null || content.equals("")) {
             return MessageConst.E_NOCONTENT.getMessage();
         }
-
 
         //入力値がある場合は空文字を返却
         return "";
