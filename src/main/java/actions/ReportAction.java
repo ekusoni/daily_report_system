@@ -115,6 +115,8 @@ public class ReportAction extends ActionBase {
                     day,
                     getRequestParam(AttributeConst.REP_TITLE),
                     getRequestParam(AttributeConst.REP_CONTENT),
+                    getRequestParam(AttributeConst.REP_ATTEND_AT),
+                    getRequestParam(AttributeConst.REP_LEAVING_AT),
                     null,
                     null);
 

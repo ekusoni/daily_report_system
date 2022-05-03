@@ -30,6 +30,14 @@
 <label for="${AttriutebuteConst.REP_CONTENT.getValue()}">内容</label><br />
 <textarea name="${AttributeConst.REP_CONTENT.getValue()}" rows="10" cols="50">${report.content}</textarea>
 <br /><br />
+
+<label for="attend">出勤時刻</label><br />
+<input type="time" id="attend" name="${AttributeConst.REP_ATTEND_AT.getValue()}" value="${report.attendAt}" />
+<br /><br />
+<label for="leaving">退勤時刻</label><br />
+<input type="time" id="leaving" name="${AttributeConst.REP_LEAVING_AT.getValue()}" value="${report.leavingAt}" />
+<br /><br />
+
 <input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />
 <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
 <button type="submit">投稿</button>

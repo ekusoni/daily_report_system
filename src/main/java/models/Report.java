@@ -82,6 +82,18 @@ public class Report {
     @Column(name=JpaConst.REP_COL_CONTENT,nullable=false)
     private String content;
 
+    /*
+     * 出勤時刻
+     */
+    @Column(name=JpaConst.EMP_COL_ATTENTD_AT,nullable=false)
+    private String attendAt;
+
+    /*
+     * 退勤時刻
+     */
+    @Column(name=JpaConst.EMP_COL_LEAVING_AT,nullable=false)
+    private String leavingAt;
+
     /**
      * 登録日時
      */
