@@ -44,8 +44,8 @@ public class ReportValidator {
         }
 
         //出勤時刻と退勤時刻が違うかのチェック
-        String attendLeavingSameError=validateAttendLeavingSame(rv.getAttendAt(),rv.getLeavingAt());
-        if(!attendLeavingSameError.equalsIgnoreCase("")) {
+        String attendLeavingSameError = validateAttendLeavingSame(rv.getAttendAt(), rv.getLeavingAt());
+        if (!attendLeavingSameError.equalsIgnoreCase("")) {
             errors.add(attendLeavingSameError);
         }
 
@@ -93,8 +93,8 @@ public class ReportValidator {
         return "";
     }
 
-    private static String validateAttendLeavingSame(String attend,String leaving) {
-        if(attend.equals(leaving)) {
+    private static String validateAttendLeavingSame(String attend, String leaving) {
+        if (attend != null && !attend.equals("") && leaving.equals(attend)) {
             return MessageConst.E_NO_SAMETIME.getMessage();
         }
 
