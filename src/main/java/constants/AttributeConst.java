@@ -36,10 +36,17 @@ public enum AttributeConst {
     EMP_PASS("password"),
     EMP_NAME("name"),
     EMP_ADMIN_FLG("admin_flag"),
+    EMP_COL_ORGANIZATION_ID("organization_id"),
 
     //管理者フラグ
-    ROLE_ADMIN(1),
-    ROLE_GENERAL(0),
+    ROLE_DIRECTOR(3),//部長
+    ROLE_MANAGER(2),//課長
+    ROLE_ADMIN(1),//管理者
+    ROLE_GENERAL(0),//一般
+
+    //組織コード
+    ORGANIZATION_CODE_ONE(1),//営業部
+    ORGANIZATION_CODE_ZERO(0),//技術部
 
     //削除フラグ
     DEL_FLAG_TRUE(1),
@@ -54,7 +61,10 @@ public enum AttributeConst {
     REP_TITLE("title"),
     REP_CONTENT("content"),
     REP_ATTEND_AT("attend_at"),//出勤時刻
-    REP_LEAVING_AT("leaving_at");//退勤時刻
+    REP_LEAVING_AT("leaving_at"),//退勤時刻
+    REP_CORRECTION_POINT("correction_point");//日報の修正点
+
+
 
     private final String text;
     private final Integer i;

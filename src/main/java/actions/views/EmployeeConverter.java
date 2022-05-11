@@ -27,9 +27,14 @@ public class EmployeeConverter {
                 ev.getPassword(),
                 ev.getAdminFlag() == null
                         ? null
-                        : ev.getAdminFlag() == AttributeConst.ROLE_ADMIN.getIntegerValue()
-                                ? JpaConst.ROLE_ADMIN
-                                : JpaConst.ROLE_GENERAL,
+                        : ev.getAdminFlag() == AttributeConst.ROLE_DIRECTOR.getIntegerValue()
+                                ? JpaConst.ROLE_DIRECTOR
+                                : ev.getAdminFlag() == AttributeConst.ROLE_MANAGER.getIntegerValue()
+                                        ? JpaConst.ROLE_MANAGER
+                                        : ev.getAdminFlag() == AttributeConst.ROLE_ADMIN.getIntegerValue()
+                                                ? JpaConst.ROLE_ADMIN
+                                                : JpaConst.ROLE_GENERAL,
+                ev.getOrganizationId(),
                 ev.getCreatedAt(),
                 ev.getUpdatedAt(),
                 ev.getDeleteFlag() == null
@@ -57,9 +62,14 @@ public class EmployeeConverter {
                 e.getPassword(),
                 e.getAdminFlag() == null
                         ? null
-                        : e.getAdminFlag() == JpaConst.ROLE_ADMIN
-                                ? AttributeConst.ROLE_ADMIN.getIntegerValue()
-                                : AttributeConst.ROLE_GENERAL.getIntegerValue(),
+                        : e.getAdminFlag() == JpaConst.ROLE_DIRECTOR
+                                ? AttributeConst.ROLE_DIRECTOR.getIntegerValue()
+                                : e.getAdminFlag() == JpaConst.ROLE_MANAGER
+                                        ? AttributeConst.ROLE_MANAGER.getIntegerValue()
+                                        : e.getAdminFlag() == JpaConst.ROLE_ADMIN
+                                                ? AttributeConst.ROLE_ADMIN.getIntegerValue()
+                                                : AttributeConst.ROLE_GENERAL.getIntegerValue(),
+                e.getOrganizationId(),
                 e.getCreatedAt(),
                 e.getUpdatedAt(),
                 e.getDeleteFlag() == null
@@ -96,6 +106,7 @@ public class EmployeeConverter {
         e.setName(ev.getName());
         e.setPassword(ev.getPassword());
         e.setAdminFlag(ev.getAdminFlag());
+        e.setOrganizationId(ev.getOrganizationId());
         e.setCreatedAt(ev.getCreatedAt());
         e.setUpdatedAt(ev.getUpdatedAt());
         e.setDeleteFlag(ev.getDeleteFlag());

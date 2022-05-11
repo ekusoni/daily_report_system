@@ -44,6 +44,11 @@ public class EmployeeView {
     private Integer adminFlag;
 
     /**
+     * 組織id
+     */
+    private Integer organizationId;
+
+    /**
      * 登録日時
      */
     private LocalDateTime createdAt;

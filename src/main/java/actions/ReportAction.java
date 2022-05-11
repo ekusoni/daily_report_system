@@ -50,6 +50,7 @@ public class ReportAction extends ActionBase {
         //全日程データの件数を取得
         long reportsCount = service.countAll();
 
+
         putRequestScope(AttributeConst.REPORTS, reports);//取得した日報データ
         putRequestScope(AttributeConst.REP_COUNT, reportsCount);//全ての日報データの件数
         putRequestScope(AttributeConst.PAGE, page);//ページ数
@@ -243,6 +244,54 @@ public class ReportAction extends ActionBase {
                 redirect(ForwardConst.ACT_REP,ForwardConst.CMD_INDEX);
             }
         }
+    }
+
+    public void approval() throws ServletException,IOException{
+
+
+
+        //idを条件に日報データを取得する
+        ReportView rv=service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+
+        putRequestScope(AttributeConst.REPORT,rv);
+
+
+
+        //承認画面を表示する
+        forward(ForwardConst.FW_REP_APPROVAL);
+
+    }
+
+    public void nonApproval() throws ServletException,IOException{
+
+        //idを条件に日報データを取得する
+        ReportView rv=service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+
+        putRequestScope(AttributeConst.REPORT,rv);
+
+
+        //非承認画面を表示する
+        forward(ForwardConst.FW_REP_NON_APPROVAL);
+    }
+
+    public void thisApproval() throws ServletException,IOException {
+
+        //一覧画面にリダイレクト
+        redirect(ForwardConst.ACT_REP,ForwardConst.CMD_INDEX);
+
+    }
+
+
+    public void destroy() throws ServletException,IOException{
+
+        //idを条件に日報データを取得する
+        ReportView rv=service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+
+        service.destroy(rv);
+
+        //一覧画面にリダイレクト
+        redirect(ForwardConst.ACT_REP,ForwardConst.CMD_INDEX);
+
     }
 
 }

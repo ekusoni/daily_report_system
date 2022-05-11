@@ -156,4 +156,13 @@ public class ReportService extends ServiceBase {
         em.getTransaction().commit();
     }
 
+    public void destroy(ReportView rv) {
+        em.getTransaction().begin();
+        Report r=findOneInternal(rv.getId());
+        em.remove(r);
+        em.getTransaction().commit();
+
+
+    }
+
 }

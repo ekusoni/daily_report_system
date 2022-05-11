@@ -14,11 +14,9 @@
         <c:forEach var="error" items="${errors}">
             ・<c:out value="${error}" /><br />
         </c:forEach>
-
-
-
     </div>
 </c:if>
+
 <label for="${AttributeConst.EMP_CODE.getValue()}">社員番号</label><br />
 <input type="text" name="${AttributeConst.EMP_CODE.getValue()}" value="${employee.code}" />
 <br /><br />
@@ -35,8 +33,18 @@
 <select name="${AttributeConst.EMP_ADMIN_FLG.getValue()}">
     <option value="${AttributeConst.ROLE_GENERAL.getIntegerValue()}"<c:if test="${employee.adminFlag==AttributeConst.ROLE_GENERAL.getIntegerValue()}">selected</c:if>>一般</option>
     <option value="${AttributeConst.ROLE_ADMIN.getIntegerValue()}"<c:if test="${employee.adminFlag==AttributeConst.ROLE_ADMIN.getIntegerValue()}">selected</c:if>>管理者</option>
+    <option value="${AttributeConst.ROLE_MANAGER.getIntegerValue()}"<c:if test="${employee.adminFlag==AttributeConst.ROLE_MANAGER.getIntegerValue()}">selected</c:if>>課長</option>
+    <option value="${AttributeConst.ROLE_DIRECTOR.getIntegerValue()}"<c:if test="${employee.adminFlag==AttributeConst.ROLE_DIRECTOR.getIntegerValue()}">selected</c:if>>部長</option>
 </select>
 <br /><br />
+
+<label for="${AttributeConst.EMP_COL_ORGANIZATION_ID.getValue()}">部署</label><br />
+<select name="${AttributeConst.EMP_COL_ORGANIZATION_ID.getValue()}">
+    <option value="${AttributeConst.ORGANIZATION_CODE_ZERO.getIntegerValue()}"<c:if test="${employee.organizationId==AttributeConst.ORGANIZATION_CODE_ZERO.getIntegerValue()}">selected</c:if>>技術部</option>
+    <option value="${AttributeConst.ORGANIZATION_CODE_ONE.getIntegerValue()}"<c:if test="${employee.organizationId==AttributeConst.ORGANIZATION_CODE_ONE.getIntegerValue()}">selected</c:if>>営業部</option>
+</select>
+<br /><br />
+
 <input type="hidden" name="${AttributeConst.EMP_ID.getValue()}" value="${employee.id}" />
 <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
 <button type="submit">投稿</button>

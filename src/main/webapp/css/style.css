@@ -146,7 +146,7 @@ table#report_list .report_name{
     padding: 10px 2%;
 }
 table#report_list .report_date{
-    width: 20px;
+    width: 170px;
 }
 
 table#report_list .report_title{
@@ -156,6 +156,9 @@ table#report_list .report_title{
 table#report_list .report_action{
     width: 13%;
 }
+table#report_list .report_approval{
+    width: 20%
+}
 
 pre{
     font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
@@ -164,3 +167,4 @@ pre{
 h3{
     font-size: larger;
 }
+

@@ -24,14 +24,22 @@ public interface JpaConst {
     String EMP_COL_NAME="name";//氏名
     String EMP_COL_PASS="password";//パスワード
     String EMP_COL_ADMIN_FLAG="admin_flag";//管理者権限
+    String EMP_COL_ORGANIZATION_ID="organization_id";//組織コード
     String EMP_COL_CREATED_AT="created_at";//登録日時
     String EMP_COL_UPDATED_AT="updated_at";//更新日時
     String EMP_COL_ATTENTD_AT="attend_at";//出勤時刻
     String EMP_COL_LEAVING_AT="leaving_at";//退勤時刻
     String EMP_COL_DELETE_FLAG="delete_flag";//削除フラグ
 
+
+    int ROLE_DIRECTOR=3;//部長
+    int ROLE_MANAGER=2;//課長
     int ROLE_ADMIN=1;//管理者権限ON(管理者)
     int ROLE_GENERAL=0;//管理者権限OFF(一般)
+
+    int ORGANIZATION_CODE_ONE=1;
+    int ORGANIZATION_CODE_ZERO=0;
+
     int EMP_DEL_TRUE=1;//削除フラグON(削除済み)
     int EMP_DEL_FALSE=0;//削除フラグOFF(現役)
 
@@ -45,6 +53,17 @@ public interface JpaConst {
     String REP_COL_CONTENT="content";//日報の内容
     String REP_COL_CREATED_AT="created_at";//登録日時
     String REP_COL_UPDATED_AT="updated_at";//更新日時
+
+
+
+
+    //組織テーブル
+    String TABLE_ORG="organizations";//テーブル名
+    //組織テーブルカラム
+    String ORG_COL_ID="id";//id
+    String ORG_COL_NAME="organization_name";//組織名
+    String ORG_COL_CODE="organization_code";//組織コード
+
 
 
     //Entity名

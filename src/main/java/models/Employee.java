@@ -82,6 +82,12 @@ public class Employee {
     private Integer adminFlag;
 
     /**
+     * 組織id
+     */
+    @Column(name=JpaConst.EMP_COL_ORGANIZATION_ID,nullable=false)
+    private Integer organizationId;
+
+    /**
      * 登録日時
      */
     @Column(name=JpaConst.EMP_COL_CREATED_AT,nullable=false)

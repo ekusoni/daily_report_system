@@ -27,10 +27,20 @@
                 <tr>
                     <th>権限</th>
                     <td><c:choose>
+                            <c:when test="${employee.adminFlag==AttributeConst.ROLE_DIRECTOR.getIntegerValue()}">部長</c:when>
+                            <c:when test="${employee.adminFlag==AttributeConst.ROLE_MANAGER.getIntegerValue()}">課長</c:when>
                             <c:when test="${employee.adminFlag==AttributeConst.ROLE_ADMIN.getIntegerValue()}">管理者</c:when>
                             <c:otherwise>一般</c:otherwise>
                         </c:choose></td>
                 </tr>
+                <tr>
+                    <th>部署</th>
+                    <td><c:choose>
+                            <c:when test="${employee.organizationId==AttributeConst.ORGANIZATION_CODE_ZERO.getIntegerValue()}">技術部</c:when>
+                            <c:otherwise>営業部</c:otherwise>
+                    </c:choose></td>
+                </tr>
+
                 <tr>
                     <th>登録日時</th>
                     <fmt:parseDate value="${employee.createdAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="createDay" type="date" />
@@ -52,4 +62,5 @@
             <a href="<c:url value='?action=${actEmp}&command=${commIdx}' />">一覧に戻る</a>
         </p>
     </c:param>
+
 </c:import>

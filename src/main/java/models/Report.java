@@ -82,6 +82,7 @@ public class Report {
     @Column(name=JpaConst.REP_COL_CONTENT,nullable=false)
     private String content;
 
+
     /*
      * 出勤時刻
      */
@@ -105,5 +106,9 @@ public class Report {
      */
     @Column(name=JpaConst.REP_COL_UPDATED_AT,nullable=false)
     private LocalDateTime updatedAt;
+
+
+
+
 
 }
