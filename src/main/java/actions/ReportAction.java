@@ -116,10 +116,12 @@ public class ReportAction extends ActionBase {
                     day,
                     getRequestParam(AttributeConst.REP_TITLE),
                     getRequestParam(AttributeConst.REP_CONTENT),
+                    null,
                     getRequestParam(AttributeConst.REP_ATTEND_AT),
                     getRequestParam(AttributeConst.REP_LEAVING_AT),
                     null,
-                    null);
+                    null,
+                    AttributeConst.DEL_FLAG_UNAPPROVED.getIntegerValue());
 
             //日報情報登録
             List<String> errors = service.create(rv);
@@ -217,6 +219,9 @@ public class ReportAction extends ActionBase {
             rv.setTitle(getRequestParam(AttributeConst.REP_TITLE));
             rv.setContent(getRequestParam(AttributeConst.REP_CONTENT));
 
+            //日報修正のフラグをリセット
+            rv.setDeleteFlag(AttributeConst.DEL_FLAG_UNAPPROVED.getIntegerValue());
+
 
             //日報データを更新する
             List<String> errors=service.update(rv);
@@ -267,6 +272,8 @@ public class ReportAction extends ActionBase {
         //idを条件に日報データを取得する
         ReportView rv=service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
+
+
         putRequestScope(AttributeConst.REPORT,rv);
 
 
@@ -275,6 +282,18 @@ public class ReportAction extends ActionBase {
     }
 
     public void thisApproval() throws ServletException,IOException {
+
+        //idを条件に日報データを取得する
+        ReportView rv=service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+
+        rv.setDeleteFlag(AttributeConst.DEL_FLAG_APPROVED.getIntegerValue());
+
+
+
+       service.update(rv);
+
+       putRequestScope(AttributeConst.REPORT,rv);
+
 
         //一覧画面にリダイレクト
         redirect(ForwardConst.ACT_REP,ForwardConst.CMD_INDEX);
@@ -287,11 +306,36 @@ public class ReportAction extends ActionBase {
         //idを条件に日報データを取得する
         ReportView rv=service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
-        service.destroy(rv);
+        rv.setCorrectionPoint(getRequestParam(AttributeConst.REP_CORRECTION_POINT));
+
+        rv.setDeleteFlag(AttributeConst.DEL_FLAG_NON_APPROVAL.getIntegerValue());
+
+
+
+        service.update(rv);
+
+        putRequestScope(AttributeConst.REPORT,rv);
+
+
 
         //一覧画面にリダイレクト
         redirect(ForwardConst.ACT_REP,ForwardConst.CMD_INDEX);
 
     }
+
+    public void nonReason() throws ServletException,IOException{
+
+        //idを条件に日報データを取得する
+        ReportView rv=service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+
+        putRequestScope(AttributeConst.REPORT,rv);
+
+        //非承認の理由画面を表示する
+        forward(ForwardConst.FW_REP_NON_REASON);
+
+    }
+
+
+
 
 }

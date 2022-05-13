@@ -31,6 +31,7 @@ public enum ForwardConst {
     CMD_APPROVAL("approval"),//承認
     CMD_NON_APPROVAL("nonApproval"),//非承認
     CMD_THIS_APPROVAL("thisApproval"),//承認済み
+    CMD_NON_APPROVAL_REASON("nonReason"),//非承認の理由
 
     //jsp
     FW_ERR_UNKNOWN("error/unknown"),
@@ -45,7 +46,8 @@ public enum ForwardConst {
     FW_REP_NEW("reports/new"),
     FW_REP_EDIT("reports/edit"),
     FW_REP_APPROVAL("reports/approval"),//承認
-    FW_REP_NON_APPROVAL("reports/nonapproval");//非承認
+    FW_REP_NON_APPROVAL("reports/nonapproval"),//非承認
+    FW_REP_NON_REASON("reports/nonreason");//非承認の理由
 
     /**
      * 文字列

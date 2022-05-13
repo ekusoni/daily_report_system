@@ -45,6 +45,11 @@ public class ReportView {
     private String content;
 
     /**
+     * 日報の修正点
+     */
+    private String correctionPoint;
+
+    /**
      * 出勤時刻
      */
     private String attendAt;
@@ -64,5 +69,10 @@ public class ReportView {
      * 更新日時
      */
     private LocalDateTime updatedAt;
+
+    /**
+     * 日報承認
+     */
+    private Integer deleteFlag;
 
 }

@@ -83,6 +83,14 @@ public class Report {
     private String content;
 
 
+    /**
+     * 日報の修正点
+     */
+    @Lob
+    @Column(name=JpaConst.REP_COL__CORRECTION_POINT,nullable=true)
+    private String correctionPoint;
+
+
     /*
      * 出勤時刻
      */
@@ -106,6 +114,12 @@ public class Report {
      */
     @Column(name=JpaConst.REP_COL_UPDATED_AT,nullable=false)
     private LocalDateTime updatedAt;
+
+    /**
+     * 日報の承認
+     */
+    @Column(name=JpaConst.REP_COL_DELETE_FLAG,nullable=false)
+    private Integer deleteFlag;
 
 
 

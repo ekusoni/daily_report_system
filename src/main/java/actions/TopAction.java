@@ -57,6 +57,13 @@ public class TopAction extends ActionBase {
         putRequestScope(AttributeConst.PAGE,page);//ページ数
         putRequestScope(AttributeConst.MAX_ROW,JpaConst.ROW_PER_PAGE);//1ページに表示するレコードの数
 
+        //
+        String point=getSessionScope(AttributeConst.REP_CORRECTION_POINT);
+        if(point != null) {
+            putRequestScope(AttributeConst.REP_CORRECTION_POINT,point);
+            removeSessionScope(AttributeConst.REP_CORRECTION_POINT);
+        }
+
 
 
         //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する

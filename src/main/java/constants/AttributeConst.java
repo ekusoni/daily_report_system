@@ -62,7 +62,15 @@ public enum AttributeConst {
     REP_CONTENT("content"),
     REP_ATTEND_AT("attend_at"),//出勤時刻
     REP_LEAVING_AT("leaving_at"),//退勤時刻
-    REP_CORRECTION_POINT("correction_point");//日報の修正点
+    REP_CORRECTION_POINT("correction_point"),//日報の修正点
+
+    REP_REPORT_FLG("report_flag"),
+
+    //報告書削除フラグ
+    DEL_FLAG_UNAPPROVED(0),
+    DEL_FLAG_APPROVED(1),
+    DEL_FLAG_NON_APPROVAL(2);
+
 
 
 

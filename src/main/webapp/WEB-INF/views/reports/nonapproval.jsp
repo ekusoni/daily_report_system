@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="constants.ForwardConst" %>
+<%@page import="constants.AttributeConst" %>
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
@@ -9,7 +10,7 @@
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>日報　承認</h2>
+        <h2>日報　非承認の理由</h2>
         <form method="POST" action="<c:url value='/?action=${actRep}&command=${commdestroy}&id=${report.id}' />">
         <table>
             <tbody>
@@ -28,7 +29,7 @@
                 </tr>
             </tbody>
         </table>
-        <label for="${AttributeConst.REP_CONTENT.getValue()}">修正点</label><br>
+        <label for="${AttributeConst.REP_CORRECTION_POINT.getValue()}">修正点</label><br>
         <textarea name="${AttributeConst.REP_CORRECTION_POINT.getValue()}"rows="10" cols="30"></textarea><br />
         <button type="submit">非承認</button>
         <br /><br />

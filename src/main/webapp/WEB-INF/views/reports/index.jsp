@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="constants.ForwardConst" %>
-<%@ page import="constants.AttributeConst" %>
+
 
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
@@ -11,6 +11,7 @@
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
 <c:set var="commApproval" value="${ForwardConst.CMD_APPROVAL.getValue()}"/>
 <c:set var="commNonapproval" value="${ForwardConst.CMD_NON_APPROVAL.getValue()}" />
+<c:set var="commNonreason" value="${ForwardConst.CMD_NON_APPROVAL_REASON.getValue()}" />
 
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -30,7 +31,6 @@
                             <th class="report_date">日付</th>
                             <th class="report_title">タイトル</th>
                             <th class="report_approval">承認</th>
-                            <th class="report_nonapproval">非承認</th>
                             <th class="report_action">操作</th>
                         </tr>
                             <c:forEach var="report" items="${reports}" varStatus="status">
@@ -41,27 +41,25 @@
                                     <td class="report_date"><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
                                     <td class="report_title">${report.title}</td>
                                     <td class="report_approval">
-                                        <c:if test="${sessionScope.login_employee.adminFlag== 2 and sessionScope.login_employee.organizationId==report.employee.organizationId and report.employee.adminFlag==0}">
-                                            <a href="<c:url value='?action=${actRep}&command=${commApproval}&id=${report.id}' />">承認</a>
-                                        </c:if>
-                                        <c:if test="${sessionScope.login_employee.adminFlag== 3 and sessionScope.login_employee.organizationId==report.employee.organizationId and report.employee.adminFlag==2}">
-                                            <a href="<c:url value='?action=${actRep}&command=${commApproval}&id=${report.id}' />">承認</a>
-                                        </c:if>
-                                    </td>
-                                    <td class="report_nonapproval">
-                                    <c:choose>
-                                         <c:when test="${sessionScope.login_employee.adminFlag== 2 and sessionScope.login_employee.organizationId==report.employee.organizationId and report.employee.adminFlag==0}">
-                                            <a href="<c:url value='?action=${actRep}&command=${commNonapproval}&id=${report.id}' />">非承認</a>
-                                         </c:when>
-                                         <c:when test="${sessionScope.login_employee.adminFlag== 3 and sessionScope.login_employee.organizationId==report.employee.organizationId and report.employee.adminFlag==2}">
-                                            <a href="<c:url value='?action=${actRep}&command=${commNonapproval}&id=${report.id}' />">非承認</a>
-                                         </c:when>
-                                    </c:choose>
-                                    </td>
+                                        <c:choose>
+                                            <c:when test="${sessionScope.login_employee.adminFlag== 2 and sessionScope.login_employee.organizationId==report.employee.organizationId and report.employee.adminFlag==0 and report.deleteFlag== 0}">
+                                                <a href="<c:url value='?action=${actRep}&command=${commApproval}&id=${report.id}' />">承認</a>&nbsp;&nbsp;&nbsp;<a href="<c:url value='?action=${actRep}&command=${commNonapproval}&id=${report.id}' />">非承認</a>
+                                            </c:when>
+                                            <c:when test="${sessionScope.login_employee.adminFlag== 3 and sessionScope.login_employee.organizationId==report.employee.organizationId and report.employee.adminFlag==2 and report.deleteFlag== 0}">
+                                                <a href="<c:url value='?action=${actRep}&command=${commApproval}&id=${report.id}' />">承認</a>&nbsp;&nbsp;&nbsp;<a href="<c:url value='?action=${actRep}&command=${commNonapproval}&id=${report.id}' />">非承認</a>
+                                            </c:when>
+                                            <c:when test="${report.deleteFlag==1 and (sessionScope.login_employee.adminFlag== 2 or sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}">承認済み</c:when>
+                                            <c:when test="${report.deleteFlag==2 and (sessionScope.login_employee.adminFlag== 2 or sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}"><a href="<c:url value='?action=${actRep}&command=${commNonreason}&id=${report.id}' />">非承認</a></c:when>
+                                            <c:when test="${report.deleteFlag==1 and (sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}" >承認済み</c:when>
+                                            <c:when test="${report.deleteFlag==2 and (sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}" ><a href="<c:url value='?action=${actRep}&command=${commNonreason}&id=${report.id}' />">非承認</a></c:when>
+                                            <c:when test="${report.deleteFlag==0 and sessionScope.login_employee.id==report.employee.id }">承認待ち</c:when>
+                                        </c:choose>
+                                     </td>
                                     <td class="report_action"><a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></td>
                                 </tr>
                             </c:forEach>
                      </tbody>
+                     <c:out value="${sessionScope.correction_point }"></c:out>
                 </table>
                 <div id="pagination">
                     (全 ${reports_count} 件) <br />
