@@ -13,6 +13,7 @@ public enum ForwardConst {
     ACT_TOP("Top"),
     ACT_EMP("Employee"),
     ACT_REP("Report"),
+    ACT_ORG("Organization"),
     ACT_AUTH("Auth"),
 
     //command
@@ -32,6 +33,7 @@ public enum ForwardConst {
     CMD_NON_APPROVAL("nonApproval"),//非承認
     CMD_THIS_APPROVAL("thisApproval"),//承認済み
     CMD_NON_APPROVAL_REASON("nonReason"),//非承認の理由
+    CMD_DEPARTMENT("department"),//部署
 
     //jsp
     FW_ERR_UNKNOWN("error/unknown"),
@@ -47,7 +49,8 @@ public enum ForwardConst {
     FW_REP_EDIT("reports/edit"),
     FW_REP_APPROVAL("reports/approval"),//承認
     FW_REP_NON_APPROVAL("reports/nonapproval"),//非承認
-    FW_REP_NON_REASON("reports/nonreason");//非承認の理由
+    FW_REP_NON_REASON("reports/nonreason"),//非承認の理由
+    FW_ORG_DEPARTMENT("organizations/new");//部署登録画面
 
     /**
      * 文字列

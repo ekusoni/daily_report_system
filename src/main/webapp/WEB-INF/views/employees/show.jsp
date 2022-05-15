@@ -35,10 +35,7 @@
                 </tr>
                 <tr>
                     <th>部署</th>
-                    <td><c:choose>
-                            <c:when test="${employee.organizationId==AttributeConst.ORGANIZATION_CODE_ZERO.getIntegerValue()}">技術部</c:when>
-                            <c:otherwise>営業部</c:otherwise>
-                    </c:choose></td>
+                    <td><c:out value="${organization.departmentName}" /></td>
                 </tr>
 
                 <tr>

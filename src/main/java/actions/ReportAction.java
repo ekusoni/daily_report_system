@@ -162,6 +162,10 @@ public class ReportAction extends ActionBase {
             //該当の日報データが存在しない場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
         } else {
+            //未承認の場合又は承認済みの場合はnull
+            if(rv.getDeleteFlag()==0 || rv.getDeleteFlag()==1) {
+                rv.setCorrectionPoint(null);
+            }
 
             putRequestScope(AttributeConst.REPORT, rv);//取得した日報データ
         }

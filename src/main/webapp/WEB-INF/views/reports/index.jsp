@@ -49,9 +49,9 @@
                                                 <a href="<c:url value='?action=${actRep}&command=${commApproval}&id=${report.id}' />">承認</a>&nbsp;&nbsp;&nbsp;<a href="<c:url value='?action=${actRep}&command=${commNonapproval}&id=${report.id}' />">非承認</a>
                                             </c:when>
                                             <c:when test="${report.deleteFlag==1 and (sessionScope.login_employee.adminFlag== 2 or sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}">承認済み</c:when>
-                                            <c:when test="${report.deleteFlag==2 and (sessionScope.login_employee.adminFlag== 2 or sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}"><a href="<c:url value='?action=${actRep}&command=${commNonreason}&id=${report.id}' />">非承認</a></c:when>
-                                            <c:when test="${report.deleteFlag==1 and (sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}" >承認済み</c:when>
-                                            <c:when test="${report.deleteFlag==2 and (sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}" ><a href="<c:url value='?action=${actRep}&command=${commNonreason}&id=${report.id}' />">非承認</a></c:when>
+                                            <c:when test="${report.deleteFlag==2 and (sessionScope.login_employee.adminFlag== 2 or sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}">非承認(詳細ページをクリック)</c:when>
+                                            <c:when test="${report.deleteFlag==1 and (sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}" >承認済み(詳細ページをクリック)</c:when>
+                                            <c:when test="${report.deleteFlag==2 and (sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}" >非承認</c:when>
                                             <c:when test="${report.deleteFlag==0 and sessionScope.login_employee.id==report.employee.id }">承認待ち</c:when>
                                         </c:choose>
                                      </td>

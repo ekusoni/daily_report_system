@@ -69,14 +69,14 @@ public interface JpaConst {
     String TABLE_ORG="organizations";//テーブル名
     //組織テーブルカラム
     String ORG_COL_ID="id";//id
-    String ORG_COL_NAME="organization_name";//組織名
-    String ORG_COL_CODE="organization_code";//組織コード
+    String ORG_COL_DEP_NAME="department_name";//部署名
 
 
 
     //Entity名
     String ENTITY_EMP="employee";//従業員
     String ENTITY_REP="report";//日報
+    String ENTITY_ORG="organization";//部署
 
     //JPQL内パラメータ
     String JPQL_PARM_CODE="code"; //社員番号
@@ -108,4 +108,10 @@ public interface JpaConst {
     //指定した従業員が作成した日報の件数を取得する
     String Q_REP_COUNT_ALL_MINE=ENTITY_REP+".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF="SELECT COUNT(r) FROM Report AS r WHERE r.employee=:"+JPQL_PARM_EMPLOYEE;
+    //全ての部署をidの降順に取得する
+    String Q_ORG_GET_ALL=ENTITY_ORG+".getAll";//
+    String Q_ORG_GET_ALL_DEF="SELECT o FROM Organization AS o ORDER BY o.id DESC";//query
+    //全ての部署の件数を取得する
+    String Q_ORG_COUNT=ENTITY_ORG+".count";
+    String Q_ORG_COUNT_DEF="SELECT COUNT(o) FROM Organization AS o";
 }

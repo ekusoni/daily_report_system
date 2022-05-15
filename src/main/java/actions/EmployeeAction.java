@@ -6,12 +6,14 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import actions.views.EmployeeView;
+import actions.views.OrganizationView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
 import constants.PropertyConst;
 import services.EmployeeService;
+import services.OrganizationService;
 
 /**
  * 従業員に関わる処理を行うActionクラス
@@ -22,6 +24,7 @@ import services.EmployeeService;
 public class EmployeeAction extends ActionBase {
 
     private EmployeeService service;
+    private OrganizationService serviceOrg;
 
     /**
      * メソッドを実行する
@@ -30,10 +33,12 @@ public class EmployeeAction extends ActionBase {
     public void process() throws ServletException, IOException {
 
         service = new EmployeeService();
+        serviceOrg= new OrganizationService();
 
         //メソッドを実行
         invoke();
 
+        serviceOrg.close();
         service.close();
     }
 
@@ -78,10 +83,15 @@ public class EmployeeAction extends ActionBase {
      */
     public void entryNew() throws ServletException, IOException {
 
+
+        //部署の一覧データをを取得する
+        List<OrganizationView> organizations = serviceOrg.getPage();
+
         //管理者かどうかのチェック
         if (checkAdmin()) {
             putRequestScope(AttributeConst.TOKEN, getTokenId());//CSRF対策用トークン
             putRequestScope(AttributeConst.EMPLOYEE, new EmployeeView());//空の従業員インスタンス
+            putRequestScope(AttributeConst.ORGANIZATIONS, organizations);//取得した部署データ
 
             //新規登録画面を表示
             forward(ForwardConst.FW_EMP_NEW);
@@ -149,6 +159,7 @@ public class EmployeeAction extends ActionBase {
         if (checkAdmin()) {
             //idを条件に従業員データを取得する
             EmployeeView ev = service.findOne(toNumber(getRequestParam(AttributeConst.EMP_ID)));
+            OrganizationView ov =serviceOrg.findOne(ev.getOrganizationId());
 
             if (ev == null || ev.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
 
@@ -158,6 +169,7 @@ public class EmployeeAction extends ActionBase {
             }
 
             putRequestScope(AttributeConst.EMPLOYEE, ev);//取得した従業員情報
+            putRequestScope(AttributeConst.ORGANIZATION,ov);//取得した部署情報
 
             //詳細画面を表示
             forward(ForwardConst.FW_EMP_SHOW);
@@ -175,6 +187,11 @@ public class EmployeeAction extends ActionBase {
         if (checkAdmin()) {
             //id条件に従業員データを取得する
             EmployeeView ev = service.findOne(toNumber(getRequestParam(AttributeConst.EMP_ID)));
+            //id条件に部署データを取得
+            OrganizationView ov=serviceOrg.findOne(ev.getOrganizationId());
+            //部署の一覧データをを取得する
+            List<OrganizationView> organizations = serviceOrg.getPage();
+
 
             if (ev == null || ev.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
 
@@ -185,6 +202,8 @@ public class EmployeeAction extends ActionBase {
 
             putRequestScope(AttributeConst.TOKEN, getTokenId());//CSRF対策用トークン
             putRequestScope(AttributeConst.EMPLOYEE, ev);//取得した従業員情報
+            putRequestScope(AttributeConst.ORGANIZATION,ov);//取得した部署データ
+            putRequestScope(AttributeConst.ORGANIZATIONS,organizations);//部署の一覧データ
 
             //編集画面を表示する
             forward(ForwardConst.FW_EMP_EDIT);

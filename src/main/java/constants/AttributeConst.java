@@ -66,10 +66,17 @@ public enum AttributeConst {
 
     REP_REPORT_FLG("report_flag"),
 
+    //組織管理
+    ORGANIZATION("organization"),
+    ORGANIZATIONS("organizations"),
+    ORG_DEP_NAME("department"),
+
     //報告書削除フラグ
     DEL_FLAG_UNAPPROVED(0),
     DEL_FLAG_APPROVED(1),
     DEL_FLAG_NON_APPROVAL(2);
+
+
 
 
 

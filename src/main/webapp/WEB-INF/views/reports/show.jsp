@@ -48,6 +48,30 @@
                 </tr>
             </tbody>
         </table>
+        <br /><br />
+
+        <c:choose>
+            <c:when test="${report.correctionPoint != null and (sessionScope.login_employee.id==report.employee.id or sessionScope.login_employee.adminFlag==3 or sessionScope.login_employee.adminFlag==2)}">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>修正点</th>
+                            <td><c:out value="${report.correctionPoint}" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </c:when>
+            <c:when test="${ report.correctionPoint != null and (sessionScope.login_employee.id==report.employee.id or sessionScope.login_employee.adminFlag==3)}">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>修正点</th>
+                            <td><c:out value="${report.correctionPoint}" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </c:when>
+        </c:choose>
 
 
         <c:if test="${sessionScope.login_employee.id==report.employee.id}">

@@ -27,7 +27,8 @@ public enum MessageConst {
     E_NOCONTENT("内容を入力してください。"),
     E_NOATTEND("出勤時刻を入力してください。"),
     E_NOLEAVING("退勤時刻を入力してください。"),
-    E_NO_SAMETIME("出勤時刻と退勤時刻が同じ時間です");
+    E_NO_SAMETIME("出勤時刻と退勤時刻が同じ時間です"),
+    E_NODEPARTMENT("部署を入力してください");
 
     /**
      * 文字列

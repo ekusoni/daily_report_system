@@ -65,7 +65,11 @@ public class ReportValidator {
         //入力値がある場合は空文字を返却
         return "";
     }
-
+    /**
+     * 内容に入力値があるかをチェックし、入力値がなければエラーメッセージを返却
+     * @param content 内容
+     * @return エラーメッセージ
+     */
     private static String validateContent(String content) {
         if (content == null || content.equals("")) {
             return MessageConst.E_NOCONTENT.getMessage();
@@ -75,6 +79,11 @@ public class ReportValidator {
         return "";
     }
 
+    /**
+     * 出勤時刻に入力値があるかをチェックし、入力値がなければエラーメッセージを返却
+     * @param attend 出勤時刻
+     * @return エラーメッセージ
+     */
     private static String validateAttend(String attend) {
         if (attend == null || attend.equals("")) {
             return MessageConst.E_NOATTEND.getMessage();
@@ -84,6 +93,11 @@ public class ReportValidator {
         return "";
     }
 
+    /**
+     * 退勤時刻に入力値があるかをチェックし、入力値がなければエラーメッセージを返却
+     * @param leaving 退勤時刻
+     * @return エラーメッセージ
+     */
     private static String validateLeaving(String leaving) {
         if (leaving == null || leaving.equals("")) {
             return MessageConst.E_NOLEAVING.getMessage();
@@ -93,6 +107,11 @@ public class ReportValidator {
         return "";
     }
 
+    /**
+     * 出勤時刻と退勤時刻が同じ時間でないかをチェックし、同時刻の場合エラーメッセージを返却
+     * @param attend leaving 出勤時刻 退勤時刻
+     * @return エラーメッセージ
+     */
     private static String validateAttendLeavingSame(String attend, String leaving) {
         if (attend != null && !attend.equals("") && leaving.equals(attend)) {
             return MessageConst.E_NO_SAMETIME.getMessage();

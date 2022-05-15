@@ -8,10 +8,10 @@ import models.Organization;
 public class OrganizationConverter {
 
 
-    public static Organization toModel(Organization ov) {
+    public static Organization toModel(OrganizationView ov) {
          return new Organization(
                  ov.getId(),
-                 ov.getName());
+                 ov.getDepartmentName());
     }
 
     public static OrganizationView toView(Organization o) {
@@ -22,7 +22,7 @@ public class OrganizationConverter {
 
         return new OrganizationView(
                 o.getId(),
-                o.getName());
+                o.getDepartmentName());
 
     }
 
@@ -47,7 +47,7 @@ public class OrganizationConverter {
      */
     public static void copyViewToModel(Organization o,Organization ov) {
         o.setId(ov.getId());
-        o.setName(ov.getName());
+        o.setDepartmentName(ov.getDepartmentName());
     }
 
 }

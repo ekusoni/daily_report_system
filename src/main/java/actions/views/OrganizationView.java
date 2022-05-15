@@ -17,9 +17,9 @@ public class OrganizationView {
     private Integer id;
 
     /**
-     * 組織名
+     * 部署名
      */
-    private String name;
+    private String departmentName;
 
 
 
