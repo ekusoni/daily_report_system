@@ -255,37 +255,15 @@ public class ReportAction extends ActionBase {
         }
     }
 
+
+    /**
+     *承認を行う
+     * @throws ServletException
+     * @throws IOException
+     */
     public void approval() throws ServletException,IOException{
 
 
-
-        //idを条件に日報データを取得する
-        ReportView rv=service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
-
-        putRequestScope(AttributeConst.REPORT,rv);
-
-
-
-        //承認画面を表示する
-        forward(ForwardConst.FW_REP_APPROVAL);
-
-    }
-
-    public void nonApproval() throws ServletException,IOException{
-
-        //idを条件に日報データを取得する
-        ReportView rv=service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
-
-
-
-        putRequestScope(AttributeConst.REPORT,rv);
-
-
-        //非承認画面を表示する
-        forward(ForwardConst.FW_REP_NON_APPROVAL);
-    }
-
-    public void thisApproval() throws ServletException,IOException {
 
         //idを条件に日報データを取得する
         ReportView rv=service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
@@ -304,6 +282,11 @@ public class ReportAction extends ActionBase {
 
     }
 
+    /**
+     * 非承認を行う
+     * @throws ServletException
+     * @throws IOException
+     */
 
     public void destroy() throws ServletException,IOException{
 
@@ -326,20 +309,6 @@ public class ReportAction extends ActionBase {
         redirect(ForwardConst.ACT_REP,ForwardConst.CMD_INDEX);
 
     }
-
-    public void nonReason() throws ServletException,IOException{
-
-        //idを条件に日報データを取得する
-        ReportView rv=service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
-
-        putRequestScope(AttributeConst.REPORT,rv);
-
-        //非承認の理由画面を表示する
-        forward(ForwardConst.FW_REP_NON_REASON);
-
-    }
-
-
 
 
 }

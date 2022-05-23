@@ -24,7 +24,7 @@
         <h2>部署　登録</h2>
         <form method="POST" action="<c:url value='/?action=${actOrg}&command=${commCre}'  />">
             <label for="${AttributeConst.ORG_DEP_NAME.getValue()}">部署</label><br />
-            <input type="text" name="${AttributeConst.ORG_DEP_NAME.getValue()}" /><br /><br />
+            <input type="text" name="${AttributeConst.ORG_DEP_NAME.getValue()}" />部<br /><br />
             <button type="submit">登録</button>
 
         </form>

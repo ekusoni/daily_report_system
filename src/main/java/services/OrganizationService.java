@@ -26,15 +26,6 @@ public class OrganizationService extends ServiceBase {
 
     }
 
-    /**
-     * 組織テーブルのデータの件数を取得し、返却する
-     * @return 組織テーブルのデータの件数
-     */
-    public long countAll() {
-        long orgCount=(long) em.createNamedQuery(JpaConst.Q_ORG_COUNT,Long.class)
-                .getSingleResult();
-        return orgCount;
-    }
 
     /**
      * idを条件に取得したデータをOrganizationViewのインスタンスで返却する

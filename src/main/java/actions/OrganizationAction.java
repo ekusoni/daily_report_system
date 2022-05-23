@@ -5,15 +5,18 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import actions.views.EmployeeView;
 import actions.views.OrganizationView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.MessageConst;
+import services.EmployeeService;
 import services.OrganizationService;
 
 public class OrganizationAction extends ActionBase {
 
     private OrganizationService service;
+    private EmployeeService serviceEmp;
 
 
     /**
@@ -23,6 +26,7 @@ public class OrganizationAction extends ActionBase {
     public void process() throws ServletException, IOException{
 
         service = new OrganizationService();
+        serviceEmp =new EmployeeService();
 
         //メソッドを実行
         invoke();
@@ -74,6 +78,31 @@ public class OrganizationAction extends ActionBase {
             redirect(ForwardConst.ACT_EMP,ForwardConst.CMD_INDEX);
         }
     }
+
+    /**
+     * 部署関係者一覧を表示する
+     * @throws ServletException
+     * @throws IOException
+     */
+
+    public void show() throws  ServletException, IOException{
+
+        ////idを条件に従業員データを取得する
+        EmployeeView ev= serviceEmp.findOne(toNumber(getRequestParam(AttributeConst.EMP_ID)));
+        //従業員の一覧データを取得する
+        List<EmployeeView> employees=serviceEmp.getPage();
+        //部署の一覧データを取得する
+        List<OrganizationView> organizations=service.getPage();
+
+        putRequestScope(AttributeConst.EMPLOYEE,ev);
+        putRequestScope(AttributeConst.EMPLOYEES,employees);
+        putRequestScope(AttributeConst.ORGANIZATIONS,organizations);
+
+        forward(ForwardConst.FW_ORG_SHOW);
+
+
+    }
+
 
 
 

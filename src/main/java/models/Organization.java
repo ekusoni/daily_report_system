@@ -19,10 +19,7 @@ import lombok.Setter;
 @NamedQueries({
     @NamedQuery(
             name=JpaConst.Q_ORG_GET_ALL,
-            query=JpaConst.Q_ORG_GET_ALL_DEF),
-    @NamedQuery(
-            name=JpaConst.Q_ORG_COUNT,
-            query=JpaConst.Q_ORG_COUNT_DEF)
+            query=JpaConst.Q_ORG_GET_ALL_DEF)
 })
 @Getter
 @Setter

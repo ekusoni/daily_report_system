@@ -37,8 +37,6 @@ public interface JpaConst {
     int ROLE_ADMIN=1;//管理者権限ON(管理者)
     int ROLE_GENERAL=0;//管理者権限OFF(一般)
 
-    int ORGANIZATION_CODE_ONE=1;
-    int ORGANIZATION_CODE_ZERO=0;
 
     int EMP_DEL_TRUE=1;//削除フラグON(削除済み)
     int EMP_DEL_FALSE=0;//削除フラグOFF(現役)
@@ -109,9 +107,6 @@ public interface JpaConst {
     String Q_REP_COUNT_ALL_MINE=ENTITY_REP+".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF="SELECT COUNT(r) FROM Report AS r WHERE r.employee=:"+JPQL_PARM_EMPLOYEE;
     //全ての部署をidの降順に取得する
-    String Q_ORG_GET_ALL=ENTITY_ORG+".getAll";//
-    String Q_ORG_GET_ALL_DEF="SELECT o FROM Organization AS o ORDER BY o.id DESC";//query
-    //全ての部署の件数を取得する
-    String Q_ORG_COUNT=ENTITY_ORG+".count";
-    String Q_ORG_COUNT_DEF="SELECT COUNT(o) FROM Organization AS o";
+    String Q_ORG_GET_ALL=ENTITY_ORG+".getAll";
+    String Q_ORG_GET_ALL_DEF="SELECT o FROM Organization AS o ORDER BY o.id DESC";
 }

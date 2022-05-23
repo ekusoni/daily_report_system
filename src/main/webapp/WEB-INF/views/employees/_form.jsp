@@ -38,10 +38,10 @@
 </select>
 <br /><br />
 
-
+<label for="${AttributeConst.EMP_COL_ORGANIZATION_ID.getValue()}">部署</label><br />
 <select name="${AttributeConst.EMP_COL_ORGANIZATION_ID.getValue()}">
     <c:forEach var="organization" items="${organizations}">
-        <option value="${organization.id}"<c:if test="${employee.organizationId==organization.id}">selected</c:if>><c:out value="${organization.departmentName}" /></option>
+        <option value="${organization.id}"<c:if test="${employee.organizationId==organization.id}">selected</c:if>><c:out value="${organization.departmentName}"/>部</option>
     </c:forEach>
 </select>
 <br /><br />

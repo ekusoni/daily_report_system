@@ -30,6 +30,14 @@ public class EmployeeService extends ServiceBase {
         return EmployeeConverter.toViewList(employees);
     }
 
+    public List<EmployeeView> getPage(){
+        List<Employee> employees=em.createNamedQuery(JpaConst.Q_EMP_GET_ALL, Employee.class)
+                .getResultList();
+
+        return EmployeeConverter.toViewList(employees);
+
+    }
+
     /**
      * 従業員テーブルのデータの件数を取得し、返却する
      * @return 従業員テーブルのデータ件数

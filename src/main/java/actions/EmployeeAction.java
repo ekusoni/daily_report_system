@@ -280,6 +280,8 @@ public class EmployeeAction extends ActionBase {
         }
     }
 
+
+
     /**
      * ログイン中の従業員が管理者かどうかチェックし、管理者でなければエラー画面を表示
      *true: 管理者 false: 管理者ではない

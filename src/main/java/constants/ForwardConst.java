@@ -48,9 +48,8 @@ public enum ForwardConst {
     FW_REP_NEW("reports/new"),
     FW_REP_EDIT("reports/edit"),
     FW_REP_APPROVAL("reports/approval"),//承認
-    FW_REP_NON_APPROVAL("reports/nonapproval"),//非承認
-    FW_REP_NON_REASON("reports/nonreason"),//非承認の理由
-    FW_ORG_DEPARTMENT("organizations/new");//部署登録画面
+    FW_ORG_DEPARTMENT("organizations/new"),//部署登録画面
+    FW_ORG_SHOW("organizations/show");//部署関係者一覧
 
     /**
      * 文字列
