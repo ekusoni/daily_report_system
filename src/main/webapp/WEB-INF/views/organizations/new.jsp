@@ -25,8 +25,9 @@
         <form method="POST" action="<c:url value='/?action=${actOrg}&command=${commCre}'  />">
             <label for="${AttributeConst.ORG_DEP_NAME.getValue()}">部署</label><br />
             <input type="text" name="${AttributeConst.ORG_DEP_NAME.getValue()}" />部<br /><br />
+            <input type="hidden" name="${AttributeConst.EMP_ID.getValue()}" value="${employee.id}" />
+            <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
             <button type="submit">登録</button>
-
         </form>
 
 
