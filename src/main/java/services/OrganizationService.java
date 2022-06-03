@@ -26,6 +26,19 @@ public class OrganizationService extends ServiceBase {
 
     }
 
+    /**
+     * 部署名を条件に該当するデータの件数を取得し、返却する
+     * @param name 部署名
+     * @return 該当するデータの件数
+     */
+    public long countByName(String name) {
+        long organization_count=(long)em.createNamedQuery(JpaConst.Q_ORG_COUNT_RESISTERED_BY_NAME,Long.class)
+                .setParameter(JpaConst.JPQL_PARM_NAME, name)
+                .getSingleResult();
+
+        return organization_count;
+    }
+
 
     /**
      * idを条件に取得したデータをOrganizationViewのインスタンスで返却する
@@ -43,7 +56,7 @@ public class OrganizationService extends ServiceBase {
      * @return バリテーションで発生したエラーのリスト
      */
     public List<String> create(OrganizationView ov){
-        List<String> errors=OrganizationValidator.validate(ov);
+        List<String> errors=OrganizationValidator.validate(this,ov);
         if(errors.size()==0) {
             createInternal(ov);
         }

@@ -80,6 +80,7 @@ public interface JpaConst {
     String JPQL_PARM_CODE="code"; //社員番号
     String JPQL_PARM_PASSWORD="password";//パスワード
     String JPQL_PARM_EMPLOYEE="employee";//従業員
+    String JPQL_PARM_NAME="department_name";//部署の名前
 
     //NamedQueryのnameとquery
     //全ての従業員をidの降順に取得する
@@ -109,4 +110,7 @@ public interface JpaConst {
     //全ての部署をidの降順に取得する
     String Q_ORG_GET_ALL=ENTITY_ORG+".getAll";
     String Q_ORG_GET_ALL_DEF="SELECT o FROM Organization AS o ORDER BY o.id DESC";
+    //指定した部署名を保持する従業員の件数を取得する
+    String Q_ORG_COUNT_RESISTERED_BY_NAME=ENTITY_ORG+".countRegisteredByName";
+    String Q_ORG_COUNT_RESISTERED_BY_NAME_DEF="SELECT COUNT(o) FROM Organization AS o WHERE o.departmentName=:"+JPQL_PARM_NAME;
 }

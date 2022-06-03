@@ -19,7 +19,11 @@ import lombok.Setter;
 @NamedQueries({
     @NamedQuery(
             name=JpaConst.Q_ORG_GET_ALL,
-            query=JpaConst.Q_ORG_GET_ALL_DEF)
+            query=JpaConst.Q_ORG_GET_ALL_DEF),
+    @NamedQuery(
+            name=JpaConst.Q_ORG_COUNT_RESISTERED_BY_NAME,
+            query=JpaConst.Q_ORG_COUNT_RESISTERED_BY_NAME_DEF),
+
 })
 @Getter
 @Setter
@@ -38,7 +42,7 @@ public class Organization {
     private Integer id;
 
     /**
-     *組織名
+     *部署名
      */
     @Column(name=JpaConst.ORG_COL_DEP_NAME,nullable=false)
     private String departmentName;
