@@ -40,7 +40,8 @@ public class OrganizationAction extends ActionBase {
     public void entryNew() throws ServletException, IOException {
 
         if (checkAdmin()) {
-            putRequestScope(AttributeConst.ORGANIZATION, new OrganizationView());
+            putRequestScope(AttributeConst.TOKEN,getTokenId());//CSRF対策用トークン
+            putRequestScope(AttributeConst.ORGANIZATION, new OrganizationView());//空の組織インスタンス
 
             //新規登録画面を表示
             forward(ForwardConst.FW_ORG_DEPARTMENT);
@@ -54,7 +55,10 @@ public class OrganizationAction extends ActionBase {
      */
     public void create() throws ServletException, IOException {
 
-        if (checkAdmin() && checkToken()) {
+
+        if(checkAdmin() && checkToken()) {
+
+
 
             OrganizationView ov = new OrganizationView(
                     null,
@@ -64,7 +68,8 @@ public class OrganizationAction extends ActionBase {
             List<String> errors = service.create(ov);
 
             if (errors.size() > 0) {
-
+                putRequestScope(AttributeConst.TOKEN,getTokenId());//CSRF対策用トークン
+                putRequestScope(AttributeConst.ORGANIZATION, new OrganizationView());//空の組織インスタンス
                 putRequestScope(AttributeConst.ERR, errors);
 
                 //新規登録画面を再表示
@@ -79,6 +84,7 @@ public class OrganizationAction extends ActionBase {
             }
         }
     }
+
 
     /**
      * 部署関係者一覧を表示する
