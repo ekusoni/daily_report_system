@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import actions.views.EmployeeView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.PropertyConst;
@@ -237,6 +238,28 @@ public abstract class ActionBase {
     @SuppressWarnings("unchecked")
     protected <R> R getContextScope(PropertyConst key) {
         return (R) context.getAttribute(key.getValue());
+    }
+
+    /**
+     * ログイン中の従業員が管理者かどうかチェックし、管理者でなければエラー画面を表示
+     *true: 管理者 false: 管理者ではない
+     *@throws ServletException
+     *@throws IOException
+     */
+    protected boolean checkAdmin() throws ServletException, IOException {
+
+        //セッションからログイン中の従業員情報を取得
+        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+
+        //管理者でなければエラー画面を表示
+        if (ev.getAdminFlag() != AttributeConst.ROLE_ADMIN.getIntegerValue()) {
+
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+            return false;
+
+        } else {
+            return true;
+        }
     }
 
 
