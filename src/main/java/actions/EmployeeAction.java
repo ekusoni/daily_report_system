@@ -83,12 +83,11 @@ public class EmployeeAction extends ActionBase {
      */
     public void entryNew() throws ServletException, IOException {
 
-
-        //部署の一覧データをを取得する
-        List<OrganizationView> organizations = serviceOrg.getPage();
-
         //管理者かどうかのチェック
         if (checkAdmin()) {
+
+            //部署の一覧データをを取得する
+            List<OrganizationView> organizations = serviceOrg.getPage();
             putRequestScope(AttributeConst.TOKEN, getTokenId());//CSRF対策用トークン
             putRequestScope(AttributeConst.EMPLOYEE, new EmployeeView());//空の従業員インスタンス
             putRequestScope(AttributeConst.ORGANIZATIONS, organizations);//取得した部署データ
@@ -129,9 +128,12 @@ public class EmployeeAction extends ActionBase {
             if (errors.size() > 0) {
                 //登録中にエラーがあった場合
 
+                //部署の一覧データをを取得する
+                List<OrganizationView> organizations = serviceOrg.getPage();
                 putRequestScope(AttributeConst.TOKEN, getTokenId());//CSRF対策トークン
                 putRequestScope(AttributeConst.EMPLOYEE, ev);//入力された従業員情報
                 putRequestScope(AttributeConst.ERR, errors);//エラーのリスト
+                putRequestScope(AttributeConst.ORGANIZATIONS,organizations);//取得した部署データ
 
                 //新規登録画面を再表示
                 forward(ForwardConst.FW_EMP_NEW);
@@ -241,9 +243,12 @@ public class EmployeeAction extends ActionBase {
             if (errors.size() > 0) {
                 //更新中にエラーが発生した場合
 
+                //部署の一覧データをを取得する
+                List<OrganizationView> organizations = serviceOrg.getPage();
                 putRequestScope(AttributeConst.TOKEN, getTokenId());//CSRF対策用トークン
                 putRequestScope(AttributeConst.EMPLOYEE, ev);//入力された従業員情報
                 putRequestScope(AttributeConst.ERR, errors);//エラーのリスト
+                putRequestScope(AttributeConst.ORGANIZATIONS,organizations);//取得した部署一覧
 
                 //編集画面を再表示
                 forward(ForwardConst.FW_EMP_EDIT);
@@ -282,25 +287,5 @@ public class EmployeeAction extends ActionBase {
 
 
 
-    /**
-     * ログイン中の従業員が管理者かどうかチェックし、管理者でなければエラー画面を表示
-     *true: 管理者 false: 管理者ではない
-     *@throws ServletException
-     *@throws IOException
-     */
-    private boolean checkAdmin() throws ServletException, IOException {
 
-        //セッションからログイン中の従業員情報を取得
-        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
-
-        //管理者でなければエラー画面を表示
-        if (ev.getAdminFlag() != AttributeConst.ROLE_ADMIN.getIntegerValue()) {
-
-            forward(ForwardConst.FW_ERR_UNKNOWN);
-            return false;
-
-        } else {
-            return true;
-        }
-    }
 }
