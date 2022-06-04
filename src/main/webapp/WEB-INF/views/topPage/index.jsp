@@ -31,7 +31,11 @@
                     <th class="report_name">氏名</th>
                     <th class="report_date">日付</th>
                     <th class="report_title">タイトル</th>
-                    <th class="report_approval">承認</th>
+
+                    <c:if test="${sessionScope.login_employee.adminFlag != 1 }">
+                        <th class="report_approval">承認</th>
+                    </c:if>
+
                     <th class="report_action">操作</th>
                 </tr>
                 <c:forEach var="report" items="${reports}" varStatus="status">
@@ -40,20 +44,24 @@
                         <td class="report_name"><c:out value="${report.employee.name}" /></td>
                         <td class="report_date"><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd'/></td>
                         <td class="report_title">${report.title}</td>
-                        <td class="report_approval">
-                            <c:choose>
-                                <c:when test="${report.employee.adminFlag==0 and sessionScope.login_employee.organizationId==report.employee.organizationId and report.deleteFlag==0 and (sessionScope.login_employee.adminFlag==2 or sessionScope.login_employee.id==report.employee.id)}">
-                                    <span class="unapproved">承認待ち</span>
-                                </c:when>
-                                <c:when test="${report.employee.adminFlag==2 and sessionScope.login_employee.organizationId==report.employee.organizationId and report.deleteFlag==0 and (sessionScope.login_employee.adminFlag==3 or sessionScope.login_employee.id==report.employee.id)}">
-                                    <span class="unapproved">承認待ち</span>
-                                </c:when>
-                                <c:when test="${report.deleteFlag==1 and report.employee.adminFlag==0 and (sessionScope.login_employee.adminFlag== 2 or sessionScope.login_employee.adminFlag== 3 or (sessionScope.login_employee.id==report.employee.id ))}">承認済み</c:when>
-                                <c:when test="${report.deleteFlag==2 and report.employee.adminFlag==0 and (sessionScope.login_employee.adminFlag== 2 or sessionScope.login_employee.adminFlag== 3 or (sessionScope.login_employee.id==report.employee.id ))}"><span class="non_approval">非承認</span></c:when>
-                                <c:when test="${report.deleteFlag==1 and report.employee.adminFlag==2 and (sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}" >承認済み</c:when>
-                                <c:when test="${report.deleteFlag==2 and report.employee.adminFlag==2 and (sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}" ><span class="non_approval">非承認</span></c:when>
-                            </c:choose>
-                        </td>
+
+                        <c:if test="${sessionScope.login_employee.adminFlag != 1 }">
+                            <td class="report_approval">
+                                <c:choose>
+                                    <c:when test="${report.employee.adminFlag==0 and sessionScope.login_employee.organizationId==report.employee.organizationId and report.deleteFlag==0 and (sessionScope.login_employee.adminFlag==2 or sessionScope.login_employee.id==report.employee.id)}">
+                                        <span class="unapproved">承認待ち</span>
+                                    </c:when>
+                                    <c:when test="${report.employee.adminFlag==2 and sessionScope.login_employee.organizationId==report.employee.organizationId and report.deleteFlag==0 and (sessionScope.login_employee.adminFlag==3 or sessionScope.login_employee.id==report.employee.id)}">
+                                        <span class="unapproved">承認待ち</span>
+                                    </c:when>
+                                    <c:when test="${report.deleteFlag==1 and report.employee.adminFlag==0 and (sessionScope.login_employee.adminFlag== 2 or sessionScope.login_employee.adminFlag== 3 or (sessionScope.login_employee.id==report.employee.id ))}">承認済み</c:when>
+                                    <c:when test="${report.deleteFlag==2 and report.employee.adminFlag==0 and (sessionScope.login_employee.adminFlag== 2 or sessionScope.login_employee.adminFlag== 3 or (sessionScope.login_employee.id==report.employee.id ))}"><span class="non_approval">非承認</span></c:when>
+                                    <c:when test="${report.deleteFlag==1 and report.employee.adminFlag==2 and (sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}" >承認済み</c:when>
+                                    <c:when test="${report.deleteFlag==2 and report.employee.adminFlag==2 and (sessionScope.login_employee.adminFlag== 3 or sessionScope.login_employee.id==report.employee.id)}" ><span class="non_approval">非承認</span></c:when>
+                                </c:choose>
+                            </td>
+                        </c:if>
+
                         <td class="report_action"><a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></td>
                     </tr>
                 </c:forEach>
